@@ -1,18 +1,34 @@
-// Enhanced sendEmail.js with HTML template
-const nodemailer = require('nodemailer');
+const nodemailer = require("nodemailer");
 
 const sendEmail = async (options) => {
-    const transporter = nodemailer.createTransport({
-        host: process.env.EMAIL_HOST,
-        port: process.env.EMAIL_PORT,
-        auth: {
-            user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_PASS,
-        },
-    });
+  // Check if email credentials are provided
+  if (
+    !process.env.EMAIL_USER ||
+    !process.env.EMAIL_PASS ||
+    process.env.EMAIL_USER.includes("your_email")
+  ) {
+    console.log("====================================================");
+    console.log("EMAIL SERVICE NOT CONFIGURED - LOGGING EMAIL CONTENT");
+    console.log("To:", options.email);
+    console.log("Subject:", options.subject);
+    console.log("Message:", options.message);
+    if (options.verificationUrl) {
+      console.log("Verification URL:", options.verificationUrl);
+    }
+    console.log("====================================================");
+    return;
+  }
 
-    // HTML template for verification email
-    const htmlTemplate = `
+  const transporter = nodemailer.createTransport({
+    host: process.env.EMAIL_HOST,
+    port: process.env.EMAIL_PORT,
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
+    },
+  });
+
+  const htmlTemplate = `
         <!DOCTYPE html>
         <html>
         <head>
@@ -27,33 +43,38 @@ const sendEmail = async (options) => {
         <body>
             <div class="container">
                 <div class="header">
-                    <h1>Welcome to your Personalized Academic Tracker!</h1>
+                    <h1>${options.subject}</h1>
                 </div>
                 <div class="content">
-                    <h2>Verify Your Email Address</h2>
-                    <p>Thank you for registering! Please click the button below to verify your email address:</p>
-                    <a href="${options.verificationUrl}" class="button">Verify Email</a>
-                    <p>Or copy and paste this link in your browser:</p>
-                    <p style="word-break: break-all; color: #4361ee;">${options.verificationUrl}</p>
-                    <p><strong>This link will expire in 15 minutes.</strong></p>
+                    <p>${options.message.replace(/\n/g, "<br>")}</p>
+                    ${
+                      options.verificationUrl
+                        ? `<a href="${options.verificationUrl}" class="button">Verify Email</a>`
+                        : ""
+                    }
+                    ${
+                      options.verificationUrl
+                        ? `<p>Or copy and paste this link: ${options.verificationUrl}</p>`
+                        : ""
+                    }
                 </div>
                 <div class="footer">
-                    <p>If you didn't create an account, you can safely ignore this email.</p>
+                    <p>Personalized Academic Tracker</p>
                 </div>
             </div>
         </body>
         </html>
     `;
 
-    const mailOptions = {
-        from: `Your App <noreply@yourapp.com>`,
-        to: options.email,
-        subject: options.subject,
-        text: options.message, // Fallback for email clients that don't support HTML
-        html: options.html || htmlTemplate
-    };
+  const mailOptions = {
+    from: `Academic Tracker <${process.env.EMAIL_USER}>`,
+    to: options.email,
+    subject: options.subject,
+    text: options.message,
+    html: options.html || htmlTemplate,
+  };
 
-    await transporter.sendMail(mailOptions);
+  await transporter.sendMail(mailOptions);
 };
 
 module.exports = sendEmail;
