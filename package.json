@@ -1,0 +1,20 @@
+{
+  "name": "personalized-academic-tracker",
+  "version": "1.0.0",
+  "description": "Full-stack academic tracking application",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "nodemon server/server.js",
+    "client": "cd client && npm run dev",
+    "install:all": "npm install && cd client && npm install && cd ../server && npm install",
+    "build": "cd client && npm run build"
+  },
+  "keywords": ["academic", "tracker", "mongodb", "express", "react"],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
+
