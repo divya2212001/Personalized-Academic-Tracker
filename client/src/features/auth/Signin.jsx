@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Eye, EyeOff, Mail, Lock } from "lucide-react";
-import googleIcon from "../../assets/google.svg";
-import facebookIcon from "../../assets/facebook.svg";
-import appleIcon from "../../assets/apple.svg";
-import mobileIcon from "../../assets/mobile.svg";
+// import googleIcon from "../../assets/google.svg";
+// import facebookIcon from "../../assets/facebook.svg";
+// import appleIcon from "../../assets/apple.svg";
+// import mobileIcon from "../../assets/mobile.svg";
 import api from "../../utils/api";
 
 const Signin = ({ darkMode }) => {
@@ -145,38 +145,38 @@ const Signin = ({ darkMode }) => {
     }
   };
 
-  // Handle social login (placeholder functions)
-  const handleGoogleLogin = () => {
-    console.log("Google login clicked");
-    // TODO: Implement Google OAuth login
-    setError(
-      "Google login is not available yet. Please use email/password login."
-    );
-  };
+  // // Handle social login (placeholder functions)
+  // const handleGoogleLogin = () => {
+  //   console.log("Google login clicked");
+  //   // Implement Google OAuth login
+  //   setError(
+  //     "Google login is not available yet. Please use email/password login."
+  //   );
+  // };
 
-  const handleFacebookLogin = () => {
-    console.log("Facebook login clicked");
-    // TODO: Implement Facebook OAuth login
-    setError(
-      "Facebook login is not available yet. Please use email/password login."
-    );
-  };
+  // const handleFacebookLogin = () => {
+  //   console.log("Facebook login clicked");
+  //   //  Implement Facebook OAuth login
+  //   setError(
+  //     "Facebook login is not available yet. Please use email/password login."
+  //   );
+  // };
 
-  const handleAppleLogin = () => {
-    console.log("Apple login clicked");
-    // TODO: Implement Apple OAuth login
-    setError(
-      "Apple login is not available yet. Please use email/password login."
-    );
-  };
+  // const handleAppleLogin = () => {
+  //   console.log("Apple login clicked");
+  //   //  Implement Apple OAuth login
+  //   setError(
+  //     "Apple login is not available yet. Please use email/password login."
+  //   );
+  // };
 
-  const handleMobileLogin = () => {
-    console.log("Mobile login clicked");
-    // TODO: Implement mobile/SMS login
-    setError(
-      "Mobile login is not available yet. Please use email/password login."
-    );
-  };
+  // const handleMobileLogin = () => {
+  //   console.log("Mobile login clicked");
+  //   // Implement mobile/SMS login
+  //   setError(
+  //     "Mobile login is not available yet. Please use email/password login."
+  //   );
+  // };
 
   // Toggle password visibility
   const togglePasswordVisibility = () => {
@@ -314,7 +314,7 @@ const Signin = ({ darkMode }) => {
             </form>
 
             <p className="text-center text-gray-600 dark:text-gray-400 text-xs sm:text-sm">
-              Don’t have an account?
+              Don't have an account?
               <Link
                 to="/signup"
                 className="text-blue-600 hover:text-blue-800 font-semibold ml-1"
