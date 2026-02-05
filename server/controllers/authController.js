@@ -16,16 +16,12 @@ const signup = async (req, res) => {
 
     let user = await User.findOne({ email: email.toLowerCase().trim() });
     if (user) {
-      if (!user.isVerified) {
-        user.set({ ...req.body, password });
-      } else {
-        return res
-          .status(409)
-          .json({
-            success: false,
-            message: "User already exists and is verified.",
-          });
-      }
+      return res
+        .status(409)
+        .json({
+          success: false,
+          message: "User already exists.",
+        });
     } else {
       const existingPhone = await User.phoneExists(phone, countryCode);
       if (existingPhone) {
@@ -41,38 +37,18 @@ const signup = async (req, res) => {
         countryCode,
         phone,
         password,
+        isVerified: true, // Auto-verify user for easy signup
       });
     }
 
-    const verificationToken = user.generateVerificationToken();
     await user.save();
 
-    const verificationUrl = `${process.env.CLIENT_URL}/email-verified/${verificationToken}`;
-    const message = `Please verify your email by clicking the link below:\n\n${verificationUrl}\n\nThis link will expire in 15 minutes.`;
-
-    try {
-      await sendEmail({
-        email: user.email,
-        subject: "Email Verification",
-        message,
-        verificationUrl,
+    res
+      .status(201)
+      .json({
+        success: true,
+        message: "Registration successful!",
       });
-
-      res
-        .status(201)
-        .json({
-          success: true,
-          message: "Registration successful! Please check your email.",
-        });
-    } catch (emailError) {
-      await User.deleteOne({ _id: user._id });
-      return res
-        .status(500)
-        .json({
-          success: false,
-          message: "Failed to send verification email.",
-        });
-    }
   } catch (error) {
     if (error.code === 11000) {
       return res
@@ -132,11 +108,12 @@ const login = async (req, res) => {
         .json({ success: false, message: "Invalid credentials" });
     }
 
-    if (!user.isVerified) {
-      return res
-        .status(403)
-        .json({ success: false, message: "Account not verified" });
-    }
+    // Removed email verification check - users can login without verifying
+    // if (!user.isVerified) {
+    //   return res
+    //     .status(403)
+    //     .json({ success: false, message: "Account not verified" });
+    // }
 
     if (!user.isActive) {
       return res
@@ -212,3 +189,4 @@ module.exports = {
   verifyToken,
   getMe,
 };
+

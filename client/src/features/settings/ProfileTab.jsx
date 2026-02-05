@@ -1,6 +1,7 @@
 // components/settings/ProfileTab.jsx
 import React from "react";
 import { User, Camera, Edit3, Save, X, Mail, Lock } from "lucide-react";
+import api from "../../utils/api";
 
 const ProfileTab = ({
   profile,
@@ -30,6 +31,12 @@ const ProfileTab = ({
       : 'bg-gray-100/80 hover:bg-gray-200/80 text-gray-700 hover:text-gray-900 border border-gray-200/60 hover:border-gray-300/60 shadow-sm hover:shadow-md'
   }`;
 
+  // Helper to get user ID
+  const getUserId = () => {
+    if (!user) return null;
+    return user._id || user.id || user._id?.$oid;
+  };
+
   const handleProfileSave = async (e) => {
     e.preventDefault();
     if (!profile.firstName.trim() || !profile.lastName.trim()) {
@@ -37,34 +44,21 @@ const ProfileTab = ({
       return;
     }
 
-    try {
-      const token = localStorage.getItem("authToken") || sessionStorage.getItem("authToken");
-      if (!token || !user) {
-        handleSaveStatus("error", "No authentication token found");
-        return;
-      }
+    const userId = getUserId();
+    if (!userId) {
+      handleSaveStatus("error", "User ID not found. Please login again.");
+      return;
+    }
 
+    try {
       const updateData = {
         firstName: profile.firstName.trim(),
         lastName: profile.lastName.trim(),
       };
 
-      const response = await fetch(`/api/auth/profile/${user.id || user._id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(updateData),
-      });
+      const response = await api.put(`/api/auth/profile/${userId}`, updateData);
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Failed to update profile");
-      }
-
-      const data = await response.json();
-      if (data.success) {
+      if (response.data.success) {
         const updatedUser = {
           ...user,
           firstName: profile.firstName.trim(),
@@ -77,11 +71,12 @@ const ProfileTab = ({
         setEditMode(false);
         handleSaveStatus("success", "Profile updated successfully");
       } else {
-        throw new Error(data.message || "Failed to update profile");
+        throw new Error(response.data.message || "Failed to update profile");
       }
     } catch (error) {
       console.error("Error updating profile:", error);
-      handleSaveStatus("error", "Failed to update profile. Please try again.");
+      const errorMessage = error.response?.data?.message || error.message || "Failed to update profile. Please try again.";
+      handleSaveStatus("error", errorMessage);
     }
   };
 

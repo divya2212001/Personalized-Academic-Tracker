@@ -1,7 +1,7 @@
 // services/academicService.js
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
 // Create axios instance with default config
 const api = axios.create({
@@ -122,3 +122,4 @@ export const academicService = {
 };
 
 export default academicService;
+

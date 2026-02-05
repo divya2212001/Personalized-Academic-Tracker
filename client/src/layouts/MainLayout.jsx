@@ -100,7 +100,7 @@ function HomePageLayout({ darkMode, setDarkMode }) {
               />
               <Route
                 path="/settings"
-                element={<Settings darkMode={darkMode} />}
+                element={<Settings darkMode={darkMode} setDarkMode={setDarkMode} />}
               />
               <Route
                 path="*"

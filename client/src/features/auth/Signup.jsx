@@ -331,6 +331,7 @@ const Signup = ({ darkMode = false }) => {
                     value={formData.password}
                     onChange={handleChange}
                     disabled={loading}
+                    autoComplete="new-password"
                     className={`w-full pl-10 pr-12 py-3 rounded-lg focus:ring-2 focus:ring-blue-500 border text-sm sm:text-base ${
                       darkMode
                         ? "bg-black text-white placeholder-gray-400 border-gray-600"

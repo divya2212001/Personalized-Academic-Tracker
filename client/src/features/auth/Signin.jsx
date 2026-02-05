@@ -121,6 +121,22 @@ const Signin = ({ darkMode }) => {
         );
       } else if (error.name === "AbortError") {
         setError("Request timed out. Please try again.");
+      } else if (error.response?.status === 403) {
+        // Handle account not verified or deactivated
+        const errorMessage = error.response?.data?.message || "";
+        if (errorMessage.toLowerCase().includes("not verified") || errorMessage.toLowerCase().includes("verify")) {
+          setError("Your email is not verified. Please check your email and verify your account, or sign up again.");
+        } else if (errorMessage.toLowerCase().includes("deactivated")) {
+          setError("Your account has been deactivated. Please contact support.");
+        } else {
+          setError("Access denied. Please check your credentials.");
+        }
+      } else if (error.response?.status === 401) {
+        setError("Invalid email or password. Please try again.");
+      } else if (error.response?.status === 400) {
+        setError(error.response?.data?.message || "Invalid request. Please check your input.");
+      } else if (error.response) {
+        setError(error.response?.data?.message || "Server error. Please try again later.");
       } else {
         setError("An unexpected error occurred. Please try again.");
       }
@@ -231,6 +247,7 @@ const Signin = ({ darkMode }) => {
                   onChange={handleChange}
                   required
                   disabled={loading}
+                  autoComplete="username"
                   className={`w-full pl-10 pr-4 py-3 rounded-lg focus:ring-2 focus:ring-blue-500 border text-sm sm:text-base ${
                     darkMode
                       ? "bg-black text-white placeholder-gray-400 border-gray-600"
@@ -252,6 +269,7 @@ const Signin = ({ darkMode }) => {
                   onChange={handleChange}
                   required
                   disabled={loading}
+                  autoComplete="current-password"
                   className={`w-full pl-10 pr-12 py-3 rounded-lg focus:ring-2 focus:ring-blue-500 border text-sm sm:text-base ${
                     darkMode
                       ? "bg-black text-white placeholder-gray-400 border-gray-600"

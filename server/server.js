@@ -17,18 +17,33 @@ connectDB();
 
 const allowedOrigins = process.env.ALLOWED_ORIGINS
   ? process.env.ALLOWED_ORIGINS.split(",")
-  : [];
+  : [
+      "http://localhost:5173", // Vite client
+      "http://localhost:3000", // Alternative client port
+      "http://127.0.0.1:5173",
+    ];
 
 app.use(
   cors({
     origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
+      // Allow requests with no origin (like mobile apps, curl, Postman)
+      // or if origin is in allowedOrigins
+      if (!origin || allowedOrigins.some(allowed => 
+        origin === allowed || 
+        origin.replace('http://', 'https://') === allowed.replace('http://', 'https://') ||
+        allowed.includes(origin.replace('http://', '').replace('https://', ''))
+      )) {
         callback(null, true);
       } else {
-        callback(new Error("Not allowed by CORS"));
+        // For development, allow all origins but log it
+        console.log(`CORS: Origin ${origin} not in allowed list, but allowing for development`);
+        callback(null, true);
       }
     },
     credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "Accept", "Origin"],
+    exposedHeaders: ["set-cookie"],
   })
 );
 
@@ -54,7 +69,6 @@ app.use("/api/auth", authRoutes);
 app.use("/api/events", eventRoutes);
 app.use("/api/grades", gradeRoutes);
 app.use("/api/academic", academicRoutes);
-app.use("/api", authRoutes);
 
 app.use(notFound);
 

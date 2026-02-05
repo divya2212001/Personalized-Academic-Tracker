@@ -58,6 +58,7 @@ const SecurityTab = ({
                       ? "Enter your new password"
                       : "Confirm your new password"
                   }
+                  autoComplete={field === "current" ? "current-password" : field === "new" ? "new-password" : "new-password"}
                 />
                 <button
                   type="button"
