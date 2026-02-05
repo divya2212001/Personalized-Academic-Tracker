@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = import.meta.env.VITE_API_URL || "https://personalized-academic-tracker-2.onrender.com";
+const API_URL = import.meta.env.VITE_API_URL || "https://personalized-academic-tracker-3.onrender.com";
 
 const api = axios.create({
   baseURL: API_URL,
