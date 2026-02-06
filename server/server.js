@@ -21,6 +21,7 @@ const allowedOrigins = process.env.ALLOWED_ORIGINS
       "http://localhost:5173", // Vite client
       "http://localhost:3000", // Alternative client port
       "http://127.0.0.1:5173",
+      "https://personalized-academic-tracker-*.vercel.app", 
     ];
 
 app.use(
