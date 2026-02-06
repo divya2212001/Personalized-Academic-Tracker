@@ -111,7 +111,7 @@ const Signup = ({ darkMode = false }) => {
     };
 
     try {
-      const response = await api.post("/api/signup", requestData);
+      const response = await api.post("/api/auth/signup", requestData);
       const data = response.data;
 
       if (data.success) {
