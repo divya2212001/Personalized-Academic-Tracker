@@ -9,7 +9,7 @@ import {
 } from "./utils";
 
 export default function GradeTable({
-  grades,
+  grades = [],
   setGrades,
   filters,
   searchTerm,
@@ -37,7 +37,6 @@ export default function GradeTable({
         return;
       }
 
-      // Use both _id and id for compatibility
       setGrades((prev) => (prev?.filter((g) => g.id !== id && g._id !== id) || []));
     } catch (err) {
       console.error("Error deleting grade:", err);
@@ -46,7 +45,7 @@ export default function GradeTable({
   };
 
   const filteredGrades = React.useMemo(() => {
-    let filtered = (grades?.filter((grade) => {
+    let filtered = grades.filter((grade) => {
       const month = grade.date
         ? new Date(grade.date).toLocaleString("default", { month: "long" })
         : "";
@@ -128,10 +127,9 @@ export default function GradeTable({
           </thead>
           <tbody className="divide-y divide-gray-200/20">
             {filteredGrades.map((grade) => {
-              // Handle both _id and id for compatibility
               const gradeId = grade.id || grade._id;
               const marks = Number(grade.marks) || 0;
-              const maxMarks = Number(grade.maxMarks) || 1; // Avoid division by zero
+              const maxMarks = Number(grade.maxMarks) || 1;
               const percentage = maxMarks > 0 ? ((marks / maxMarks) * 100).toFixed(1) : "0.0";
               
               return (
