@@ -356,9 +356,10 @@ export default function Prediction() {
 
           {/* Suggestions */}
           <PersonalizedGuidance score={score} form={form} />
+          
         </div>
-        <StudentAnalytics history={history} />
       </div>
+         <StudentAnalytics history={history} />
     </div>
   );
 }
