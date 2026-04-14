@@ -70,31 +70,31 @@ export default function StudentAnalytics({
   const distributionData = [
     {
       category: "Poor",
-      count: history.filter(
+      count: (history?.filter(
         (i) => i.score <= 50
-      ).length,
+      ) || []).length,
     },
     {
       category: "Average",
-      count: history.filter(
+      count: (history?.filter(
         (i) =>
           i.score > 50 &&
           i.score <= 70
-      ).length,
+      ) || []).length,
     },
     {
       category: "Good",
-      count: history.filter(
+      count: (history?.filter(
         (i) =>
           i.score > 70 &&
           i.score <= 85
-      ).length,
+      ) || []).length,
     },
     {
       category: "Excellent",
-      count: history.filter(
+      count: (history?.filter(
         (i) => i.score > 85
-      ).length,
+      ) || []).length,
     },
   ];
 

@@ -89,7 +89,7 @@ export default function Prediction() {
   };
 
   const deleteSingle = (id) => {
-    const updated = history.filter((item) => item.id !== id);
+    const updated = (history?.filter((item) => item.id !== id) || []);
     saveHistory(updated);
   };
 

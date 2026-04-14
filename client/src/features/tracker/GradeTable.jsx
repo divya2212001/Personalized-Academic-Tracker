@@ -38,7 +38,7 @@ export default function GradeTable({
       }
 
       // Use both _id and id for compatibility
-      setGrades((prev) => prev.filter((g) => g.id !== id && g._id !== id));
+      setGrades((prev) => (prev?.filter((g) => g.id !== id && g._id !== id) || []));
     } catch (err) {
       console.error("Error deleting grade:", err);
       alert("Network error while deleting grade");
@@ -46,7 +46,7 @@ export default function GradeTable({
   };
 
   const filteredGrades = React.useMemo(() => {
-    let filtered = grades.filter((grade) => {
+    let filtered = (grades?.filter((grade) => {
       const month = grade.date
         ? new Date(grade.date).toLocaleString("default", { month: "long" })
         : "";
