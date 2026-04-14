@@ -8,6 +8,7 @@ import Calendar from "../features/calendar/Calendar.jsx";
 import Settings from "../features/settings/Settings.jsx";
 import Tracker from "../features/tracker/tracker.jsx";
 import api from "../utils/api";
+import Prediction from "../pages/Prediction";
 
 function HomePageLayout({ darkMode, setDarkMode }) {
   const location = useLocation();
@@ -110,6 +111,10 @@ function HomePageLayout({ darkMode, setDarkMode }) {
                     Page Coming Soon
                   </div>
                 }
+              />
+              <Route
+                path="/prediction"
+                element={<Prediction darkMode={darkMode} />}
               />
             </Routes>
           </div>

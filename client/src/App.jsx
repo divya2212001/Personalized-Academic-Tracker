@@ -5,6 +5,7 @@ import Signin from "./features/auth/Signin.jsx";
 import MainLayout from "./layouts/MainLayout.jsx";
 import Landing from "./pages/Landing.jsx";
 import EmailVerified from "./features/auth/EmailVerified.jsx";
+import Prediction from "./pages/Prediction";
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -38,6 +39,7 @@ function App() {
           element={<Signin darkMode={darkMode} setDarkMode={setDarkMode} />}
         />
         <Route path="/email-verified/:token" element={<EmailVerified />} />
+      
       </Routes>
     </Router>
   );

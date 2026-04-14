@@ -23,6 +23,12 @@ const navItems = [
     alt: "Tracker",
     path: "/tracker",
   },
+  { 
+    key: "prediction",
+    icon: <AiFillPieChart size={24} />,
+    alt: "Prediction",
+    path: "/prediction",
+  },
   {
     key: "settings",
     icon: <AiOutlineSetting size={24} />,

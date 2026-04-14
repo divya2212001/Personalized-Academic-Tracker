@@ -13,9 +13,6 @@ const healthRoutes = require("./routes/healthRoutes");
 
 const app = express();
 
-/* =======================
-   DATABASE
-======================= */
 connectDB();
 
 
@@ -66,15 +63,10 @@ app.use(
   })
 );
 
-/* =======================
-   BODY PARSERS
-======================= */
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 
-/* =======================
-   DEV LOGGER
-======================= */
+
 if (process.env.NODE_ENV === "development") {
   app.use((req, res, next) => {
     console.log(`${req.method} ${req.originalUrl}`);
@@ -82,11 +74,8 @@ if (process.env.NODE_ENV === "development") {
   });
 }
 
-/* =======================
-   ROUTES
-======================= */
 app.get("/", (req, res) => {
-  res.send("🎉 Academic Tracker API is running");
+  res.send("<h1>Academic Tracker API is running</h1>");
 });
 
 app.use("/api/health", healthRoutes);
@@ -95,25 +84,16 @@ app.use("/api/events", eventRoutes);
 app.use("/api/grades", gradeRoutes);
 app.use("/api/academic", academicRoutes);
 
-/* =======================
-   ERRORS
-======================= */
 app.use(notFound);
 app.use(errorHandler);
 
-/* =======================
-   SERVER
-======================= */
 const PORT = process.env.PORT || 3001;
 
 const server = app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-  console.log(`🌍 Environment: ${process.env.NODE_ENV || "development"}`);
+  console.log(`Server running on port ${PORT}`);
+  console.log(`Environment: ${process.env.NODE_ENV || "development"}`);
 });
 
-/* =======================
-   PROCESS SAFETY
-======================= */
 process.on("unhandledRejection", (err) => {
   console.error("Unhandled Rejection:", err.message);
   server.close(() => process.exit(1));
