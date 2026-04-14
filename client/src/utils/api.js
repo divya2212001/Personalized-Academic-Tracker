@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // Use local server for development
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
+const API_URL = import.meta.env.VITE_API_URL || "https://personalized-academic-tracker-2.onrender.com";
 
 const api = axios.create({
   baseURL: API_URL,
