@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { mlApi } from "../utils/api.js";
 import { AiFillPieChart, AiFillDelete } from "react-icons/ai";
 import PersonalizedGuidance from "../components/PersonalizedGuidance";
 import StudentAnalytics from "../components/StudentAnalytics";
@@ -52,10 +52,7 @@ export default function Prediction() {
         Object.entries(form).map(([k, v]) => [k, Number(v)])
       );
 
-      const res = await axios.post(
-        "http://127.0.0.1:5000/predict",
-        payload
-      );
+      const res = await mlApi.post("/predict", payload);
 
       const result = Number(res.data.predicted_score);
       setScore(result);
