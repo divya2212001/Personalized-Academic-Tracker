@@ -21,6 +21,10 @@ api.interceptors.request.use((config) => {
 
 export const mlApi = axios.create({
   baseURL: ML_API_URL,
+  headers: {
+    "Content-Type": "application/json"
+  },
+  timeout: 10000
 });
 
 // ML API doesn't need auth token
