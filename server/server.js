@@ -24,7 +24,7 @@ const allowedOrigins = [
   "http://127.0.0.1:3000",
   "http://127.0.0.1:3001",
   "https://personalized-academic-tracker-imzr.onrender.com",
-  "https://personalized-academic-tracker-wzzj.vercel.app/",
+  "https://personalized-academic-tracker-wzzj.vercel.app",
 ];
 
 app.use(
