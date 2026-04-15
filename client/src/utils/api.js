@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const ML_API_URL = import.meta.env.VITE_ML_API_URL || "http://127.0.0.1:5000";
+export const ML_API_URL = import.meta.env.VITE_ML_API_URL || "https://personalized-academic-tracker-1.onrender.com";
 
 // Main backend API
 const API_URL = import.meta.env.VITE_API_URL || "https://personalized-academic-tracker-imzr.onrender.com";
