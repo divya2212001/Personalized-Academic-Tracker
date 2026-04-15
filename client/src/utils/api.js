@@ -3,7 +3,7 @@ import axios from "axios";
 export const ML_API_URL = import.meta.env.VITE_ML_API_URL || "http://127.0.0.1:5000";
 
 // Main backend API
-const API_URL = import.meta.env.VITE_API_URL || "https://personalized-academic-tracker-2.onrender.com";
+const API_URL = import.meta.env.VITE_API_URL || "https://personalized-academic-tracker-imzr.onrender.com";
 
 const api = axios.create({
   baseURL: API_URL,
