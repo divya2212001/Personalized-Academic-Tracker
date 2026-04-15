@@ -6,7 +6,7 @@ import joblib
 import numpy as np
 
 app = Flask(__name__)
-CORS(app, origins=["http://localhost:5173", "https://personalized-academic-tracker-wzzj.vercel.app"])
+CORS(app, origins=["https://personalized-academic-tracker-wzzj-nb6vz95fu.vercel.app/"])
 
 
 model = joblib.load("student_model.pkl")
