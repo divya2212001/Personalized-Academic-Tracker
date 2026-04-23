@@ -34,12 +34,3 @@ A smart, student-centric web app that helps track grades, monitor attendance, an
 - Database: MongoDB Atlas
 
 ---
-
-## Contributing
-
-We're running this open-source sprint!
-
-- Check the [Issues](https://github.com/your-org/your-repo/issues)
-- Pick a `good first issue` or `frontend/backend` tag
-- Submit a PR with a clear description
-- New contributors welcome!
