@@ -1,74 +1,76 @@
-## 🤝 Contributing Guide
+# Contributing Guide
 
-Thank you for considering contributing to this project! We welcome your ideas, suggestions, and improvements. Before you begin, please read the guidelines below to keep everything organized and consistent.
-
----
-
-### 📁 Project Setup Guidelines
-
-* **Do NOT include `node_modules/`** in your pull requests.
-  Add `node_modules/` to `.gitignore` if not already present.
-
-* **Always create a new branch** for your pull requests (PRs).
-  Example:
-
-  ```bash
-  git checkout -b feature/your-feature-name
-  ```
+Thank you for considering contributing to this project. This guide covers how to set up your work, how to submit changes, and what information to include in pull requests.
 
 ---
 
-### ✅ Best Practices for Contributions
+## 1. Project setup guidelines
 
-* Write **clean, readable code** and follow the project's coding conventions.
-* Use **clear and descriptive commit messages**.
-* Try to **make PRs focused** on a single change/feature.
+- Do not include `node_modules/` in your pull requests. Ensure `node_modules` is listed in `.gitignore`.
+- Create a new branch for each pull request.
 
----
+Example:
 
-### 📸 Feature Documentation
-
-Whenever you add a **new feature**, please include:
-
-* 🖼️ **At least one image** (e.g., a screenshot or UI snippet).
-* 🎥 **A short video** demo (GIFs or screen recordings are great).
-
-You can upload these to GitHub directly or use tools like [Loom](https://www.loom.com/) or [Gyazo](https://gyazo.com/).
+```bash
+git checkout -b feature/your-feature-name
+```
 
 ---
 
-### 🧪 Testing & Validation
+## 2. Contribution best practices
 
-* Test your feature locally before submitting a PR.
-* Make sure it doesn’t break any existing functionality.
+- Keep code clean and readable.
+- Follow the project’s existing coding style and conventions.
+- Use descriptive commit messages.
+- Keep pull requests focused on one change or one feature.
 
 ---
 
-### 🔀 Submitting a Pull Request
+## 3. Feature documentation requirements
 
-1. Fork this repo.
+Whenever you add a new feature, include:
+
+- At least one image (screenshot or UI snippet)
+- A short demo (GIF or screen recording)
+
+You can upload directly to GitHub or link to Loom (https://www.loom.com/) / Gyazo (https://gyazo.com/).
+
+---
+
+## 4. Testing and validation
+
+- Test your changes locally before submitting.
+- Ensure you do not break existing functionality.
+
+---
+
+## 5. Submitting a pull request
+
+1. Fork the repository.
 2. Create a branch from `main` or `dev`:
 
-   ```bash
-   git checkout -b feature/your-feature-name
-   ```
+```bash
+git checkout -b feature/your-feature-name
+```
+
 3. Make your changes.
 4. Commit and push:
 
-   ```bash
-   git commit -m "Add: [your feature name]"
-   git push origin feature/your-feature-name
-   ```
-5. Open a PR to the main repository with a clear description, images, and video (if applicable).
+```bash
+git commit -m "Add: your feature name"
+git push origin feature/your-feature-name
+```
+
+5. Open a PR to the main repository with:
+
+- A clear title
+- A description of the change
+- Screenshots/demo artifacts (if applicable)
 
 ---
 
-### 🚫 Things to Avoid
+## 6. Things to avoid
 
-* Don’t commit large/irrelevant files (like `node_modules`, `.env`, etc.)
-* Don’t make PRs from your `main` branch.
-
----
-
-**Let’s build something awesome together! 🚀**
-
+- Do not commit large/irrelevant files.
+- Do not commit `.env` files or other secrets.
+- Do not open PRs directly from `main`.
