@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-
+import json
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -192,7 +191,29 @@ cv_scores = cross_val_score(
 
 print("\nCross Validation R2 Scores:", cv_scores)
 print("Average CV Score:", cv_scores.mean())
+metrics = {
+    "best_model": "Random Forest Regressor",
+    "training_date": pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S"),
+    "metrics": {
+        "MAE": round(mean_absolute_error(y_test, final_pred), 4),
+        "RMSE": round(np.sqrt(mean_squared_error(y_test, final_pred)), 4),
+        "R2_Score": round(r2_score(y_test, final_pred), 4),
+        "Cross_Validation_R2": round(cv_scores.mean(), 4),
+        "Best_Parameters": grid.best_params_,
+        "Feature_Importance": {
+            feature: round(score, 4)
+            for feature, score in zip(
+                X.columns,
+                best_model.feature_importances_
+            )
+        }
+    }
+}
 
+with open("metrics.json", "w") as f:
+    json.dump(metrics, f, indent=4)
+
+print("metrics.json saved successfully!")
 
 joblib.dump(best_model, "student_model.pkl")
 joblib.dump(scaler, "scaler.pkl")
